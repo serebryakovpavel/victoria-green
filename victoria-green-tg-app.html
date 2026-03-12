@@ -404,14 +404,6 @@
   .contact-btn-session:active { transform: scale(0.98); opacity: 0.88; }
   .contact-btn-icon { width: 22px; height: 22px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 
-  .contact-form { background: var(--cream); border-radius: 16px; padding: 20px; }
-  .form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 500; margin-bottom: 16px; color: var(--dark);
-  }
-  .form-field { margin-bottom: 11px; }
-  .form-label { display: block; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--light-mid); margin-bottom: 5px; }
   .form-input, .form-textarea {
     width: 100%; padding: 12px 13px;
     background: white; border: 1px solid var(--border);
@@ -421,253 +413,15 @@
     -webkit-appearance: none;
   }
   .form-input:focus, .form-textarea:focus { border-color: var(--dark-sage); }
-  .form-textarea { height: 86px; resize: none; }
-  .form-submit {
-    width: 100%; margin-top: 14px; padding: 14px;
-    background: var(--dark); color: white; border: none;
-    border-radius: 10px; font-family: 'Jost', sans-serif;
-    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
-    cursor: pointer; transition: transform 0.1s;
-  }
-  .form-submit:active { transform: scale(0.98); }
 
   .bottom-pad { height: 24px; }
 
-  /* ===== ONBOARDING ===== */
-  #onboarding {
-    position: fixed; inset: 0; z-index: 1000;
-    background: var(--warm-white);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: flex-end;
-    padding-bottom: 48px;
-    transition: opacity 0.4s ease;
-  }
-  #onboarding.hidden {
-    opacity: 0; pointer-events: none;
-  }
-  .ob-slides {
-    width: 100%; flex: 1;
-    display: flex; overflow: hidden;
-    position: relative;
-  }
-  .ob-slides-inner {
-    display: flex; width: 300%;
-    height: 100%;
-    transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
-  }
-  .ob-slide {
-    width: 33.333%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: flex-end;
-    padding: 0 32px 32px;
-    position: relative;
-    flex-shrink: 0;
-  }
-  .ob-photo {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center top;
-    border-radius: 0;
-  }
-  .ob-photo::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 30%,
-      rgba(30,28,24,0.55) 70%,
-      rgba(30,28,24,0.88) 100%
-    );
-  }
-  .ob-content {
-    position: relative; z-index: 2;
-    text-align: center; color: white;
-  }
-  .ob-eyebrow {
-    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 14px;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .ob-eyebrow::before, .ob-eyebrow::after {
-    content: ''; width: 24px; height: 1px; background: var(--gold);
-  }
-  .ob-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 40px; font-weight: 300; line-height: 1.1;
-    margin-bottom: 14px; color: white;
-  }
-  .ob-heading em { font-style: italic; color: var(--gold); }
-  .ob-text {
-    font-size: 13px; color: rgba(255,255,255,0.72);
-    line-height: 1.7; margin-bottom: 0;
-  }
-  .ob-bottom {
-    width: 100%; padding: 0 24px;
-    display: flex; flex-direction: column; align-items: center; gap: 14px;
-  }
-  .ob-dots {
-    display: flex; gap: 6px; align-items: center;
-  }
-  .ob-dot {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: var(--border); transition: all 0.3s;
-  }
-  .ob-dot.active {
-    width: 18px; border-radius: 3px;
-    background: var(--dark-sage);
-  }
-  .ob-btn {
-    width: 100%; padding: 16px;
-    background: var(--dark); color: white; border: none;
-    border-radius: 14px; font-family: 'Jost', sans-serif;
-    font-size: 13px; letter-spacing: 0.06em;
-    cursor: pointer; transition: opacity 0.15s;
-  }
-  .ob-btn:active { opacity: 0.85; }
-  .ob-skip {
-    font-size: 12px; color: var(--light-mid);
-    background: none; border: none;
-    font-family: 'Jost', sans-serif; cursor: pointer;
-    letter-spacing: 0.04em;
-  }
 
-
-  /* ── ONBOARDING OFFERS SLIDE ── */
-  .ob-slide-offers {
-    background: var(--warm-white);
-    justify-content: flex-start;
-    padding: 40px 24px 24px;
-    overflow-y: auto;
-  }
-  .ob-offers-content { width: 100%; }
-  .ob-offers-eyebrow {
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--earth); display: flex; align-items: center; gap: 8px;
-    margin-bottom: 12px;
-  }
-  .ob-offers-eyebrow::before { content:''; width:20px; height:1px; background:var(--gold); }
-  .ob-offers-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 34px; font-weight: 300; line-height: 1.1;
-    color: var(--dark); margin-bottom: 24px;
-  }
-  .ob-offers-title em { font-style: italic; color: var(--dark-sage); }
-  .ob-offers-list { display: flex; flex-direction: column; gap: 0; }
-  .ob-offer {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 16px 0; border-bottom: 1px solid var(--border);
-  }
-  .ob-offer:last-child { border-bottom: none; }
-  .ob-offer-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: var(--cream); display: flex;
-    align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .ob-offer-text { font-size: 13px; color: var(--mid); line-height: 1.55; }
-  .ob-offer-text strong {
-    display: block; font-size: 14px; font-weight: 500;
-    color: var(--dark); margin-bottom: 2px;
-  }
 
 </style>
 </head>
 <body>
 
-
-<div id="onboarding">
-  <div class="ob-slides">
-  <div class="ob-slides-inner" id="ob-slides">
-
-    <!-- Slide 1 -->
-    <div class="ob-slide" id="ob-slide-0">
-      <div class="ob-photo" style="background-image: url('')"></div>
-      <div class="ob-content">
-        <div class="ob-eyebrow">Бренд-архитектор</div>
-        <div class="ob-heading">Виктория<br><em>Грин</em></div>
-        <div class="ob-text">Помогаю предпринимателям выстраивать сильный бренд — системно, стратегически, с позицией на рынке.</div>
-      </div>
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="ob-slide" id="ob-slide-1">
-      <div class="ob-photo" style="background-image: url(''); filter: brightness(0.85);"></div>
-      <div class="ob-content">
-        <div class="ob-eyebrow">10+ лет · 6 стран · 4000+ часов</div>
-        <div class="ob-heading">Стратегия,<br>которая <em>работает</em></div>
-        <div class="ob-text">Бренд-стратегия, коммуникации и личный бренд предпринимателя — выберите свой формат работы.</div>
-      </div>
-    </div>
-
-    <!-- Slide 3: Offers -->
-    <div class="ob-slide ob-slide-offers" id="ob-slide-2">
-      <div class="ob-offers-content">
-        <div class="ob-offers-eyebrow">Что вы получите</div>
-        <div class="ob-offers-title">Результаты<br>работы с <em>Викторией</em></div>
-        <div class="ob-offers-list">
-          <div class="ob-offer">
-            <div class="ob-offer-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A6741" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-            </div>
-            <div class="ob-offer-text">
-              <strong>Чёткая платформа бренда</strong>
-              Ценности, позиция и система смыслов — понятные команде и рынку
-            </div>
-          </div>
-          <div class="ob-offer">
-            <div class="ob-offer-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <div class="ob-offer-text">
-              <strong>Системный маркетинг</strong>
-              Управляемая коммуникация с предсказуемым результатом
-            </div>
-          </div>
-          <div class="ob-offer">
-            <div class="ob-offer-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A6741" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-              </svg>
-            </div>
-            <div class="ob-offer-text">
-              <strong>Сильная позиция на рынке</strong>
-              Бренд, который выделяется и формирует влияние основателя
-            </div>
-          </div>
-          <div class="ob-offer">
-            <div class="ob-offer-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-                <path d="M16 3.13a4 4 0 010 7.75"/>
-              </svg>
-            </div>
-            <div class="ob-offer-text">
-              <strong>Личный бренд предпринимателя</strong>
-              Стратегия публичности, которая усиливает бизнес
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  </div>
-
-  <div class="ob-bottom">
-    <div class="ob-dots">
-      <div class="ob-dot active" id="ob-dot-0"></div>
-      <div class="ob-dot" id="ob-dot-1"></div>
-      <div class="ob-dot" id="ob-dot-2"></div>
-    </div>
-    <button class="ob-btn" id="ob-btn" onclick="obNext()">Далее →</button>
-    <button class="ob-skip" onclick="obClose()">Пропустить</button>
-  </div>
-</div>
 
 <nav>
   <div class="nav-tabs">
@@ -1082,22 +836,6 @@
       </button>
     </div>
 
-    <div class="contact-form">
-      <div class="form-title">Оставить заявку</div>
-      <div class="form-field">
-        <label class="form-label">Ваше имя</label>
-        <input class="form-input" type="text" placeholder="Как к вам обращаться?">
-      </div>
-      <div class="form-field">
-        <label class="form-label">Telegram или телефон</label>
-        <input class="form-input" type="text" placeholder="@username или +7...">
-      </div>
-      <div class="form-field">
-        <label class="form-label">Запрос</label>
-        <textarea class="form-textarea" placeholder="Опишите задачу или формат работы, который вас интересует..."></textarea>
-      </div>
-      <button class="form-submit" onclick="this.textContent='Заявка отправлена ✓'; this.style.background='var(--dark-sage)'">Отправить заявку</button>
-    </div>
   </div>
   <div class="bottom-pad"></div>
 </section>
@@ -1107,67 +845,6 @@
 <script>
   function showSection(id, tabEl) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    async function sendApplication(btn) {
-      const name = document.getElementById('f-name').value.trim();
-      const contact = document.getElementById('f-contact').value.trim();
-      const request = document.getElementById('f-request').value.trim();
-
-      if (!name || !contact) {
-        // highlight empty fields
-        if (!name) document.getElementById('f-name').style.borderColor = '#c0392b';
-        if (!contact) document.getElementById('f-contact').style.borderColor = '#c0392b';
-        return;
-      }
-
-      btn.textContent = 'Отправляем...';
-      btn.disabled = true;
-
-      // Get Telegram user info if available
-      let userInfo = '';
-      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
-        const u = window.Telegram.WebApp.initDataUnsafe.user;
-        userInfo = `\n👤 Telegram: @${u.username || '—'} (${u.first_name || ''} ${u.last_name || ''})`;
-      }
-
-      const now = new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
-      const text = `🔔 Новая заявка с сайта Виктории Грин\n\n` +
-        `👤 Имя: ${name}\n` +
-        `📱 Контакт: ${contact}\n` +
-        `💬 Запрос: ${request || 'не указан'}` +
-        userInfo +
-        `\n\n🕐 ${now} (МСК)`;
-
-      const BOT_TOKEN = '8711527418:AAFnSI5pWUdEPCbkrKm4J_7B9rN00nbK7Fw';
-      const CHAT_IDS = ['256267198'];
-
-      try {
-        await Promise.all(CHAT_IDS.map(chatId =>
-          fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: text,
-              parse_mode: 'HTML'
-            })
-          })
-        ));
-        btn.textContent = 'Заявка отправлена ✓';
-        btn.style.background = 'var(--dark-sage)';
-        document.getElementById('f-name').value = '';
-        document.getElementById('f-contact').value = '';
-        document.getElementById('f-request').value = '';
-      } catch (e) {
-        btn.textContent = 'Ошибка — попробуйте ещё раз';
-        btn.style.background = '#c0392b';
-        btn.disabled = false;
-        setTimeout(() => {
-          btn.textContent = 'Отправить заявку';
-          btn.style.background = '';
-          btn.disabled = false;
-        }, 3000);
-      }
-    }
 
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     const section = document.getElementById(id);
@@ -1209,50 +886,9 @@
     });
   }
 
-  // ── ONBOARDING ──
-  (function() {
-    const STORAGE_KEY = 'vg_onboarded_v1';
-    let shown = false;
-    try { shown = localStorage.getItem(STORAGE_KEY) === '1'; } catch(e) {}
-    if (shown) {
-      const el = document.getElementById('onboarding');
-      if (el) el.style.display = 'none';
-    }
-  })();
 
-  let obCurrent = 0;
-  const OB_TOTAL = 3;
 
-  function obNext() {
-    if (obCurrent < OB_TOTAL - 1) {
-      obCurrent++;
-      obUpdateSlides();
-    } else {
-      obClose();
-    }
-  }
 
-  function obUpdateSlides() {
-    const slides = document.getElementById('ob-slides');
-    slides.style.transform = `translateX(-${obCurrent * 33.333}%)`;
-    // dots
-    for (let i = 0; i < OB_TOTAL; i++) {
-      const d = document.getElementById('ob-dot-' + i);
-      if (d) d.className = 'ob-dot' + (i === obCurrent ? ' active' : '');
-    }
-    // btn text
-    const btn = document.getElementById('ob-btn');
-    if (btn) btn.textContent = obCurrent === OB_TOTAL - 1 ? 'Начать →' : 'Далее →';
-  }
-
-  function obClose() {
-    const el = document.getElementById('onboarding');
-    if (el) {
-      el.classList.add('hidden');
-      setTimeout(() => { el.style.display = 'none'; }, 400);
-    }
-    try { localStorage.setItem('vg_onboarded_v1', '1'); } catch(e) {}
-  }
 
 </script>
 </body>
