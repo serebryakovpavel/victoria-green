@@ -53,14 +53,16 @@
   .nav-tabs::-webkit-scrollbar { display: none; }
   .nav-tab {
     flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 3px;
-    font-size: 9.5px; font-weight: 400;
-    letter-spacing: 0.05em; text-transform: uppercase;
+    align-items: center; justify-content: center; gap: 2px;
+    font-size: 8.5px; font-weight: 400;
+    letter-spacing: 0.03em; text-transform: uppercase;
     color: var(--light-mid); cursor: pointer;
     transition: color 0.25s;
     border-top: 2px solid transparent;
-    padding: 8px 4px 6px;
+    padding: 8px 2px 6px;
+    min-width: 0;
   }
+  .nav-tab span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
   .nav-tab svg { transition: stroke 0.25s; }
   .nav-tab.active { color: var(--dark-sage); border-top-color: var(--dark-sage); }
   .nav-tab.active svg { stroke: var(--dark-sage); }
@@ -939,6 +941,10 @@
     tg.expand();
     tg.setHeaderColor('#FAF7F2');
     tg.setBackgroundColor('#FAF7F2');
+    // Force expand repeatedly to ensure full screen
+    setTimeout(() => tg.expand(), 100);
+    setTimeout(() => tg.expand(), 300);
+    setTimeout(() => tg.expand(), 600);
   }
 </script>
 </body>
