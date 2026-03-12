@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="tg:fullscreen" content="true">
+<meta name="tg:background-color" content="#FAF7F2">
+<meta name="tg:header-color" content="#FAF7F2">
 <title>Виктория Грин — Бренд-архитектор</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1173,15 +1176,37 @@
   }
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp;
+
+    // 1. Стандартный expand
     tg.expand();
+
+    // 2. Цвета шапки и фона под дизайн
     tg.setHeaderColor('#FAF7F2');
     tg.setBackgroundColor('#FAF7F2');
-    // Try requestFullscreen if available (TG 8.0+)
-    if (tg.requestFullscreen) {
+
+    // 3. Полноэкранный режим (TG 8.0+)
+    if (typeof tg.requestFullscreen === 'function') {
       try { tg.requestFullscreen(); } catch(e) {}
     }
-    // Force expand repeatedly
-    [50, 150, 300, 500, 1000].forEach(t => setTimeout(() => tg.expand(), t));
+
+    // 4. isClosingConfirmationEnabled — предотвращает случайное закрытие
+    if (typeof tg.enableClosingConfirmation === 'function') {
+      try { tg.enableClosingConfirmation(); } catch(e) {}
+    }
+
+    // 5. Принудительный expand с задержками (на случай если TG ещё не готов)
+    [100, 300, 600, 1000, 2000].forEach(t => setTimeout(() => {
+      tg.expand();
+      if (typeof tg.requestFullscreen === 'function') {
+        try { tg.requestFullscreen(); } catch(e) {}
+      }
+    }, t));
+
+    // 6. Слушаем событие viewportChanged — если пользователь свернул, снова раскрываем
+    tg.onEvent('viewportChanged', function(e) {
+      if (!e.isStateStable) return;
+      if (!tg.isExpanded) tg.expand();
+    });
   }
 
   // ── ONBOARDING ──
