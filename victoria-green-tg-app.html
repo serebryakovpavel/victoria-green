@@ -281,9 +281,59 @@
   }
   .post-read { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dark-sage); }
 
+  .post-expand-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px 13px; border-top: 1px solid var(--border);
+    cursor: pointer; width: 100%;
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--dark-sage); background: none; border-left: none; border-right: none; border-bottom: none;
+  }
+  .post-expand-btn .arrow { transition: transform 0.3s; font-size: 14px; }
+  .post-expand-btn.open .arrow { transform: rotate(180deg); }
+  .post-full-text {
+    display: none; padding: 0 16px 16px;
+    font-size: 13px; line-height: 1.7; color: var(--mid);
+  }
+  .post-full-text.visible { display: block; }
+  .post-full-text h3 { font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; color: var(--dark); margin: 16px 0 6px; }
+  .post-full-text p { margin-bottom: 12px; }
+  .post-full-text strong { color: var(--dark); font-weight: 500; }
+  .post-full-link {
+    display: block; margin: 16px 16px 16px; padding: 12px;
+    background: var(--warm-white); border-radius: 10px;
+    border: 1px solid var(--border); text-align: center;
+    font-size: 12px; color: var(--dark-sage); text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+
   .blog-cta { padding: 0 24px 32px; }
 
-  /* ===== PROGRAMS ===== */
+  /* ===== VIDEO ===== */
+  .video-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: white; cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .video-card:active { transform: scale(0.98); }
+  .video-thumb {
+    position: relative; width: 100%; height: 200px;
+    background: var(--dark); overflow: hidden;
+  }
+  .video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(0,0,0,0.6);
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .video-body { padding: 14px 16px 16px; }
+  .video-tag { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dark-sage); margin-bottom: 6px; }
+  .video-title { font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 500; color: var(--dark); line-height: 1.35; }
+
+
   .programs-list { padding: 16px 24px 32px; display: flex; flex-direction: column; gap: 16px; }
 
   .program-card { border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
@@ -450,6 +500,7 @@
     <div class="nav-tab" onclick="showSection('blog', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg><span>Блог</span></div>
     <div class="nav-tab" onclick="showSection('programs', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>Программы</span></div>
     <div class="nav-tab" onclick="showSection('about', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Обо мне</span></div>
+    <div class="nav-tab" onclick="showSection('video', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span>Видео</span></div>
     <div class="nav-tab" onclick="showSection('contact', this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Контакт</span></div>
   </div>
 </nav>
@@ -523,16 +574,38 @@
 
   <div class="posts-list">
     <div class="post-card">
-      <div class="post-img c1">
-        <span class="post-cat">Бренд-стратегия</span>
-        <span class="post-emoji">🏗️</span>
+      <div class="post-img c1" style="background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjgwIiBoZWlnaHQ9IjM0MCIgdmlld0JveD0iMCAwIDY4MCAzNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjY4MCIgaGVpZ2h0PSIzNDAiIGZpbGw9IiM0QTY3NDEiLz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI0MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA2KSIvPgogIDxjaXJjbGUgY3g9IjE2MCIgY3k9IjIwIiByPSIyNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA2KSIvPgogIDxjaXJjbGUgY3g9IjYyMCIgY3k9IjMwMCIgcj0iNTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNikiLz4KICA8Y2lyY2xlIGN4PSI2NDAiIGN5PSI4MCIgcj0iMzAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNikiLz4KICA8Y2lyY2xlIGN4PSIzMCIgY3k9IjI4MCIgcj0iMzUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNikiLz4KICA8Y2lyY2xlIGN4PSI1NjAiIGN5PSI4MCIgcj0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyMDEsMTY5LDExMCwwLjI1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iNTYwIiBjeT0iODAiIHI9IjYwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAxLDE2OSwxMTAsMC4yKSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGNpcmNsZSBjeD0iNTYwIiBjeT0iODAiIHI9IjMyIiBmaWxsPSJyZ2JhKDIwMSwxNjksMTEwLDAuMikiLz4KICA8bGluZSB4MT0iNTI4IiB5MT0iODAiIHgyPSI1OTIiIHkyPSI4MCIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjksMTEwLDAuNSkiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSI1NjAiIHkxPSI0OCIgeDI9IjU2MCIgeTI9IjExMiIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjksMTEwLDAuNSkiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxwb2x5Z29uIHBvaW50cz0iNTIwLDE4MCA2MjAsMTgwIDU5MiwyNDAgNTQ4LDI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDIwMSwxNjksMTEwLDAuNDUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSI1NzAiIHkxPSIyNDAiIHgyPSI1NzAiIHkyPSIyNjUiIHN0cm9rZT0icmdiYSgyMDEsMTY5LDExMCwwLjQ1KSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8Y2lyY2xlIGN4PSI1NzAiIGN5PSIyNzIiIHI9IjciIGZpbGw9InJnYmEoMjAxLDE2OSwxMTAsMC41KSIvPgogIDxsaW5lIHgxPSI1MzAiIHkxPSIyMDAiIHgyPSI2MTAiIHkyPSIyMDAiIHN0cm9rZT0icmdiYSgyMDEsMTY5LDExMCwwLjMpIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8bGluZSB4MT0iNTM2IiB5MT0iMjE4IiB4Mj0iNjA0IiB5Mj0iMjE4IiBzdHJva2U9InJnYmEoMjAxLDE2OSwxMTAsMC4zKSIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHJlY3QgeD0iNDgiIHk9IjEwMCIgd2lkdGg9IjQiIGhlaWdodD0iMTQwIiBmaWxsPSIjQzlBOTZFIiByeD0iMiIvPgogIDx0ZXh0IHg9IjY4IiB5PSIxNDgiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjQyIiBmaWxsPSIjZmZmZmZmIiBsZXR0ZXItc3BhY2luZz0iMSIgZm9udC13ZWlnaHQ9ImJvbGQiPtCc0JDQoNCa0JXQotCY0J3QkzwvdGV4dD4KICA8dGV4dCB4PSI2OCIgeT0iMTk2IiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIzOCIgZmlsbD0iI2ZmZmZmZiIgbGV0dGVyLXNwYWNpbmc9IjEiIGZvbnQtd2VpZ2h0PSJib2xkIj7Qm9Ce0JrQkNCb0KzQndCe0JPQniDQkdCg0JXQndCU0JA8L3RleHQ+CiAgPHRleHQgeD0iNjgiIHk9IjIzMiIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIGZpbGw9IiNmZmZmZmYiIGxldHRlci1zcGFjaW5nPSIxIiBmb250LXdlaWdodD0iYm9sZCI+0JIgMjAyNjwvdGV4dD4KICA8cmVjdCB4PSI2OCIgeT0iMjQ4IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiNDOUE5NkUiLz4KICA8dGV4dCB4PSIxMTgiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiMxYTFhMWEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIiBmb250LXdlaWdodD0iYm9sZCI+MjAyNjwvdGV4dD4KICA8dGV4dCB4PSIxODIiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC42NSkiIGxldHRlci1zcGFjaW5nPSIyIj41INCk0JjQm9Cs0KLQoNCe0JIg0K3QpNCk0JXQmtCi0JjQktCd0J7QodCi0Jg8L3RleHQ+CiAgPHRleHQgeD0iNjgiIHk9IjMwOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC40KSIgbGV0dGVyLXNwYWNpbmc9IjIiPtCR0KDQldCd0JQt0KHQotCg0JDQotCV0JPQmNCvPC90ZXh0PgogIDxjaXJjbGUgY3g9IjYxMiIgY3k9IjI5MCIgcj0iMi41IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpIi8+CiAgPGNpcmNsZSBjeD0iNjI4IiBjeT0iMjkwIiByPSIyLjUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiLz4KICA8Y2lyY2xlIGN4PSI2NDQiIGN5PSIyOTAiIHI9IjIuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjE1KSIvPgogIDxjaXJjbGUgY3g9IjYxMiIgY3k9IjMwNiIgcj0iMi41IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpIi8+CiAgPGNpcmNsZSBjeD0iNjI4IiBjeT0iMzA2IiByPSIyLjUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiLz4KICA8Y2lyY2xlIGN4PSI2NDQiIGN5PSIzMDYiIHI9IjIuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjE1KSIvPgogIDxjaXJjbGUgY3g9IjYxMiIgY3k9IjMyMiIgcj0iMi41IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMTUpIi8+CiAgPGNpcmNsZSBjeD0iNjI4IiBjeT0iMzIyIiByPSIyLjUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiLz4KICA8Y2lyY2xlIGN4PSI2NDQiIGN5PSIzMjIiIHI9IjIuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjE1KSIvPgo8L3N2Zz4=') center/cover no-repeat; padding:0; overflow:hidden; position:relative;">
+        <span class="post-cat" style="position:absolute; top:12px; left:12px;">Бренд-стратегия</span>
       </div>
       <div class="post-body">
-        <div class="post-date">Март 2025</div>
-        <div class="post-title">Почему ребрендинг не помогает, если не изменилась стратегия</div>
-        <div class="post-excerpt">Новый логотип — это не новый бренд. Разбираем, что на самом деле стоит за трансформацией бренда...</div>
+        <div class="post-date">Март 2026</div>
+        <div class="post-title">Маркетинг локального бренда в 2026: 5 фильтров эффективности</div>
+        <div class="post-excerpt">В 2026 маркетинг выигрывает не за счет большего присутствия, а за счет большей точности...</div>
       </div>
-      <div class="post-footer"><span class="post-read">Читать · 6 мин</span><span style="color:var(--gold)">→</span></div>
+      <button class="post-expand-btn" onclick="toggleArticle(this)">
+        <span>Читать статью · 5 мин</span>
+        <span class="arrow">↓</span>
+      </button>
+      <div class="post-full-text">
+        <p><strong>В 2026 маркетинг локального бренда выигрывает не за счет большего присутствия, а за счет большей точности.</strong> Именно поэтому сегодня важны не охваты и присутствие «на всех площадках», а то, насколько управляемо ваш маркетинг приводит к заявке, покупке и возврату клиента.</p>
+
+        <h3>Фильтр #1. Работаем «на своих»</h3>
+        <p>Найдите не просто свою ЦА, а <strong>своего человека</strong>. Пол, возраст и уровень дохода — это база, которая почти ничего не говорит о том, как человек принимает решение о покупке. Важнее понять: с какими мыслями он просыпается, какие решения уже пытался принять и на каком этапе обычно «уходит» из клиентского пути.</p>
+
+        <h3>Фильтр #2. Привлекаем не просто ярко, а точно</h3>
+        <p>В 2026 выигрывает не просто красивый креатив, а тот, который за 3 секунды отвечает на три вопроса: <strong>это про меня? мне это прямо сейчас нужно? почему это стоит досмотреть?</strong> Сильный креатив — это тот, который помог человеку быстрее эмоционально приблизиться к бренду.</p>
+
+        <h3>Фильтр #3. Не распыляемся</h3>
+        <p>Первый сигнал, что вы не дорабатываете собственные площадки — зеркалите контент без учета логики каждой из них. Важно, чтобы прослеживалась <strong>логика клиентского пути</strong>: сильный первый экран, понятный оффер, корректные смыслы и ясное следующее действие. Отдельный приоритет — <strong>собственная база контактов</strong>.</p>
+
+        <h3>Фильтр #4. Влияем через личный бренд</h3>
+        <p>Для локального бизнеса <strong>личный бренд собственника</strong> в 2026 — уже не тщеславие, а инструмент доверия. Предприниматели приходят в него из чистой прагматики: снижать стоимость доверия, усиливать входящий поток, легче заходить в более высокий ценовой сегмент.</p>
+
+        <h3>Фильтр #5. Смотрим на ИИ трезво</h3>
+        <p>Самый выгодный ИИ в 2026 — тот, которого клиент почти не замечает, но который делает ваш маркетинг быстрее, точнее и дешевле. Ставку стоит делать на <strong>ИИ-автоматизации</strong>: функциональные дашборды, анализ звонков, контент-цепочки и грамотные CRM-сценарии.</p>
+
+        <p><strong>В 2026 выигрывает не тот бренд, которого просто больше в инфополе, а тот, кто точнее понимает своего человека и меньше теряет на каждом этапе пути к покупке.</strong></p>
+      </div>
     </div>
 
     <div class="post-card">
@@ -826,6 +899,31 @@
   <div class="bottom-pad"></div>
 </section>
 
+<!-- ===== VIDEO ===== -->
+<section id="video" class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Подкаст</div>
+    <div class="section-title section-title--bebas">Видео<br><em>и подкасты</em></div>
+    <p class="section-lead">Разговоры о бренд-стратегии, маркетинге и предпринимательском мышлении.</p>
+  </div>
+
+  <div style="padding: 0 24px 32px;">
+    <div class="video-card" onclick="window.open('https://m.youtube.com/watch?v=FxfxHrDu4pY', '_blank')">
+      <div class="video-thumb">
+        <img src="https://img.youtube.com/vi/FxfxHrDu4pY/hqdefault.jpg" alt="Видео" onerror="this.style.display='none'">
+        <div class="video-play">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+      <div class="video-body">
+        <div class="video-tag">YouTube · Подкаст</div>
+        <div class="video-title">Смотреть на YouTube →</div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-pad"></div>
+</section>
+
 <!-- ===== CONTACT ===== -->
 <section id="contact" class="section">
   <div class="contact-dark">
@@ -866,6 +964,12 @@
 </main>
 
 <script>
+  function toggleArticle(btn) {
+    btn.classList.toggle('open');
+    const fullText = btn.nextElementSibling;
+    fullText.classList.toggle('visible');
+  }
+
   function showSection(id, tabEl) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
 
