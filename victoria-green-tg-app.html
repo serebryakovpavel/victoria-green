@@ -52,18 +52,18 @@
     display: flex; gap: 0;
     width: 100%; scrollbar-width: none;
     margin-left: 0; overflow: hidden;
-    justify-content: center;
+    justify-content: space-evenly;
   }
   .nav-tabs::-webkit-scrollbar { display: none; }
   .nav-tab {
-    flex: 1; display: flex; flex-direction: column;
+    flex: 0 0 auto; display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 2px;
     font-size: 7px; font-weight: 400;
     letter-spacing: 0.01em; text-transform: uppercase;
     color: var(--light-mid); cursor: pointer;
     transition: color 0.25s;
     border-top: 2px solid transparent;
-    padding: 6px 1px 4px;
+    padding: 6px 8px 4px;
     min-width: 0;
   }
   .nav-tab svg { width: 17px; height: 17px; flex-shrink: 0; }
@@ -72,7 +72,7 @@
   .nav-tab.active { color: var(--dark-sage); border-top-color: var(--dark-sage); }
   .nav-tab.active svg { stroke: var(--dark-sage); }
 
-  main { padding-top: 0; padding-bottom: 62px; }
+  main { padding-top: 0; padding-bottom: 80px; }
 
   .section { display: none; animation: fadeUp 0.35s ease forwards; min-height: calc(100vh - 62px); }
   .section.active { display: block; }
@@ -485,7 +485,7 @@
   }
   .form-input:focus, .form-textarea:focus { border-color: var(--dark-sage); }
 
-  .bottom-pad { height: 24px; }
+  .bottom-pad { height: 80px; }
 
 
 
